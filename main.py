@@ -1,5 +1,6 @@
 import sys
 from script_generator import generate_script
+from image_fetcher import fetch_images
 
 def main():  
     script = generate_script()

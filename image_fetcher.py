@@ -15,7 +15,7 @@ def fetch_images(query: str, number_of_images: int):
         response.raise_for_status()
         response_data = response.json()
         photos = response_data['photos']
-        image_urls = [photo['url'] for photo in photos]
+        image_urls = [photo['src']['original'] for photo in photos]
         return image_urls
     except Exception as error:
         print('Error fetching photos:', error)
@@ -27,6 +27,7 @@ def main():
     number_of_images = 5
     image_urls = fetch_images(query, number_of_images)
     print(image_urls)
+
 
 if __name__ == '__main__':
     main()
