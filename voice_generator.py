@@ -2,32 +2,59 @@ import requests
 import base64
 from moviepy.editor import AudioFileClip
 
-
 ENDPOINT = 'https://tiktok-tts.weilnet.workers.dev/api/generation'
+TEXT_CHAR_LIMIT = 299
+
+# Split text into array of chunks where each chunk contains number of characters less than or equal to chunk_size
+
+
+def split_text(text: str, chunk_size: int):
+    words = text.split(" ")
+    text_chunks = []
+    current_chunk = ""
+    for word in words:
+        if (len(current_chunk) + len(word) <= chunk_size):
+            # Add to current chunk
+            current_chunk += ' ' + word
+        else:
+            # Add current chunk to all chunks and start a new chunk
+            if current_chunk:
+                text_chunks.append(current_chunk.strip())
+            current_chunk = word
+    if current_chunk:
+        text_chunks.append(current_chunk.strip())
+    return text_chunks
 
 
 def generate_voice(text: str):
-    res = requests.post(url=ENDPOINT, json={
-                        'text': text, 'voice': 'en_us_001'})
-    res.raise_for_status()
-    return res.json()['data']
+    try:
+        res = requests.post(url=ENDPOINT, json={
+                            'text': text, 'voice': 'en_us_001'})
+        res.raise_for_status()
+        return res.json()['data']
+    except Exception as error:
+        print('Error getting response from TikTok TTS API:', error)
 
 
 def text_to_speech(text: str, audio_filepath: str):
-    voice_code = None
     try:
-        voice_code = generate_voice(text)
-    except Exception as error:
-        print('Error getting response from TikTok TTS API:', error)
-        return
-    
-    voice_bytes = base64.b64decode(voice_code)
-    with open(audio_filepath, 'wb') as file:
-        file.write(voice_bytes)
+        if len(text) <= TEXT_CHAR_LIMIT:
+            encoded_audio = generate_voice(text)
+        else:
+            text_chunks = split_text(text, chunk_size=TEXT_CHAR_LIMIT)
+            encoded_audio = ''.join([generate_voice(text_chunk) for text_chunk in text_chunks])
+
+        audio_bytes = base64.b64decode(encoded_audio)
+        with open(audio_filepath, 'wb') as file:
+            file.write(audio_bytes)
         return AudioFileClip(audio_filepath)
-        
+
+    except Exception as error:
+        print("Error generating text to speech:", error)
+        return
+
 
 if __name__ == '__main__':
-    text = "Did you know that people who spend time looking into each other's eyes experience a chemical reaction in their brains? This reaction is linked to increased intimacy and a surge in oxytocin, known as the 'love hormone.'"
+    text = "Did you know that people who spend time looking into each other's eyes experience a chemical reaction in their brains? This reaction is linked to increased intimacy and a surge in oxytocin, known as the 'love hormone'. So next time you're with your loved one, don't be afraid to lock eyes and hold their gaze."
     audio_filepath = 'output/audio/voiceover.mp3'
     text_to_speech(text, audio_filepath)
