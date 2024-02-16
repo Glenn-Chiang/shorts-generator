@@ -1,16 +1,20 @@
+from moviepy.editor import CompositeVideoClip, TextClip, VideoFileClip
+from moviepy.video.tools.subtitles import SubtitlesClip
+import assemblyai as aai
+import os
 from dotenv import load_dotenv
 load_dotenv()
-import os
-import assemblyai as aai
+
 
 ASSEMBLY_AI_API_KEY = os.getenv('ASSEMBLY_AI_API_KEY')
 
+
 def generate_subtitles(audio_filepath: str, subtitles_filepath: str):
-    try: 
+    try:
         aai.settings.api_key = ASSEMBLY_AI_API_KEY
         transciber = aai.Transcriber()
         transcript = transciber.transcribe(audio_filepath)
-        subtitles = transcript.export_subtitles_srt()
+        subtitles = transcript.export_subtitles_srt(chars_per_caption=20)
 
         with open(subtitles_filepath, 'w') as file:
             file.write(subtitles)
@@ -18,9 +22,23 @@ def generate_subtitles(audio_filepath: str, subtitles_filepath: str):
         return subtitles
     except Exception as error:
         print("Error generating subtitles:", error)
-        
+
+
+def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str):
+    def generator(text): return TextClip(txt=text, font='Courier', fontsize=100,
+                                         color='white', stroke_color='black', stroke_width=5, method='caption')
+    subtitles = SubtitlesClip(subtitles_filepath, generator)
+    video = VideoFileClip(video_filepath)
+    subtitled_video = CompositeVideoClip(
+        [video, subtitles.set_position(('center', 'center'))])
+    return subtitled_video
+
 
 if __name__ == '__main__':
     audio_filepath = 'output/audio/voiceover.mp3'
     subtitles_filepath = 'output/subtitles/subtitles.srt'
-    subtitles = generate_subtitles(audio_filepath, subtitles_filepath)
+    video_filepath = 'output/video/video.mp4'
+    final_output_filepath = 'output/final/final.mp4'
+    subtitled_video = burn_subtitles_into_video(video_filepath=video_filepath, subtitles_filepath=subtitles_filepath)
+    
+    subtitled_video.write_videofile(filename=final_output_filepath, fps=30)
