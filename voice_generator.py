@@ -55,6 +55,6 @@ def text_to_speech(text: str, audio_filepath: str):
 
 
 if __name__ == '__main__':
-    text = "Did you know that people who spend time looking into each other's eyes experience a chemical reaction in their brains? This reaction is linked to increased intimacy and a surge in oxytocin, known as the 'love hormone'. So next time you're with your loved one, don't be afraid to lock eyes and hold their gaze."
+    text = "hello world"
     audio_filepath = 'output/audio/voiceover.mp3'
     text_to_speech(text, audio_filepath)
