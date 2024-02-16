@@ -15,7 +15,7 @@ def resize_image(image: Image.Image, size: Tuple[int, int]):
     return image.resize(size=size)
 
 
-def images_to_video(image_urls: List[str], video_size: Tuple[int, int], video_filepath: str, fps: float):
+def images_to_video(image_urls: List[str], video_size: Tuple[int, int], fps: float):
     images = []
     for image_url in image_urls:
         try:
@@ -39,7 +39,7 @@ def main():
     fps = 1/4
     image_urls = ['https://images.pexels.com/photos/265722/pexels-photo-265722.jpeg', 'https://images.pexels.com/photos/704748/pexels-photo-704748.jpeg',
                   'https://images.pexels.com/photos/258421/pexels-photo-258421.jpeg', 'https://images.pexels.com/photos/1187079/pexels-photo-1187079.jpeg', 'https://images.pexels.com/photos/1024984/pexels-photo-1024984.jpeg']
-    image_sequence = images_to_video(image_urls, video_filepath=video_filepath, video_size=video_size, fps=fps)
+    image_sequence = images_to_video(image_urls, video_size=video_size, fps=fps)
     image_sequence.write_videofile(video_filepath)
 
 

@@ -3,26 +3,27 @@ Format your response in the json format shown by the examples below.
 Use short, simple sentences that are easy to understand.
 {
     "title": "Why do we crave connection?",
-    "content": "Why do we crave connection with others? Being part of a group or having close relationships provides us with a sense of safety and belonging. It makes us feel valued and reduces feelings of loneliness. Our relationships shape our identity and give us a sense of purpose. They help us understand who we are and what our place in the world is."
+    "content": "Why do we crave connection with others? Being part of a group or having close relationships provides us with a sense of safety and belonging. It makes us feel valued and reduces feelings of loneliness. Our relationships shape our identity and give us a sense of purpose. They help us understand who we are and what our place in the world is.",
+    "keywords": ["personal connection", "relationships"]
 }
 {
     "title": "What is imposter syndrome?",
-    "content": "Do you often feel like a 'fraud' even when you do well? You might be suffering from imposter syndrome. Imposter syndrome is that uncomfortable feeling you experience when you think you're unqualified and incompetent, even when you're actually performing well. You might look around and assume everyone knows what they're doing except you. And if you achieve something good, you'll chalk your accomplishments up to 'good luck.'"
+    "content": "Do you often feel like a 'fraud' even when you do well? You might be suffering from imposter syndrome. Imposter syndrome is that uncomfortable feeling you experience when you think you're unqualified and incompetent, even when you're actually performing well. You might look around and assume everyone knows what they're doing except you. And if you achieve something good, you'll chalk your accomplishments up to 'good luck.'",
+    "keywords": ["imposter syndrome", "insecurity"]
 }
 {
     "title": "Why do we proscrastinate?",
-    "content: "Procrastination isn't a sign of laziness or poor time management. Our brains are actually wired to seek instant gratification and avoid challenging tasks. Procrastinating can give us a surge of dopamine, which feels rewarding in the moment. It's like a quick fix even if we know it's not helpful in the long run. Finding ways to reward yourself for completing small tasks can help you break the cycle of procrastination"
+    "content: "Procrastination isn't a sign of laziness or poor time management. Our brains are actually wired to seek instant gratification and avoid challenging tasks. Procrastinating can give us a surge of dopamine, which feels rewarding in the moment. It's like a quick fix even if we know it's not helpful in the long run. Finding ways to reward yourself for completing small tasks can help you break the cycle of procrastination",
+    "keywords": ["procrastination"]
 }
 {
     "title": "Why do we like gossip?",
-    "content": ""Gossiping can make us feel closer to others and give us a sense of belonging. When we gossip, we're essentially sharing information about other people, which can make us feel like we're part of an 'in' group. It can also make us feel superior to the person we're gossiping about. However, excessive gossiping can be damaging to relationships and even lead to social isolation."
-}
-{
-    "title": "Why do we seek out the familiar?",
-    "content": "Why do we gravitate towards the familiar in our lives, even if it's not always the best choice? It comes down to our brains' natural tendency to conserve energy. Sticking with what we know is easier and requires less effort. It's also a way to feel safe and secure. The familiar provides a sense of comfort and stability in a world that can often feel unpredictable and overwhelming."
+    "content": ""Gossiping can make us feel closer to others and give us a sense of belonging. When we gossip, we're essentially sharing information about other people, which can make us feel like we're part of an 'in' group. It can also make us feel superior to the person we're gossiping about. However, excessive gossiping can be damaging to relationships and even lead to social isolation.",
+    "keywords": ["gossip", "talking"]
 }
 {
     "title": "The secret of love?",
-    "content": "Did you know that people who spend time looking into each other's eyes experience a chemical reaction in their brains? This reaction is linked to increased intimacy and a surge in oxytocin, known as the "love hormone." So next time you're with your loved one, don't be afraid to lock eyes and hold their gaze."
+    "content": "Did you know that people who spend time looking into each other's eyes experience a chemical reaction in their brains? This reaction is linked to increased intimacy and a surge in oxytocin, known as the "love hormone." So next time you're with your loved one, don't be afraid to lock eyes and hold their gaze.",
+    "keywords": ["love", "eye contact"]
 }
-
+The keywords field should contain a list of keywords related to the content that can be used like search terms.
