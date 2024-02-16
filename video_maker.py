@@ -25,12 +25,11 @@ def images_to_video(image_urls: List[str], video_size: Tuple[int, int], video_fi
             print(f"Error getting image from url: {image_url}")
 
     images = [resize_image(image, video_size) for image in images]
-    for index, image in enumerate(images):
-        image.save(f'images/{index}.png')
+    # for index, image in enumerate(images):
+    #     image.save(f'images/{index}.png')
     np_images = [np.asarray(image) for image in images]
     image_sequence = ImageSequenceClip(np_images, fps=fps)
-
-    image_sequence.write_videofile(video_filepath)
+    return image_sequence
 
 
 def main():
@@ -40,7 +39,8 @@ def main():
     fps = 1/4
     image_urls = ['https://images.pexels.com/photos/265722/pexels-photo-265722.jpeg', 'https://images.pexels.com/photos/704748/pexels-photo-704748.jpeg',
                   'https://images.pexels.com/photos/258421/pexels-photo-258421.jpeg', 'https://images.pexels.com/photos/1187079/pexels-photo-1187079.jpeg', 'https://images.pexels.com/photos/1024984/pexels-photo-1024984.jpeg']
-    images_to_video(image_urls, video_filepath=video_filepath, video_size=video_size, fps=fps)
+    image_sequence = images_to_video(image_urls, video_filepath=video_filepath, video_size=video_size, fps=fps)
+    image_sequence.write_videofile(video_filepath)
 
 
 if __name__ == '__main__':
