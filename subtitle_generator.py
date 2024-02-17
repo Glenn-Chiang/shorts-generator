@@ -25,7 +25,7 @@ def generate_subtitles(audio_filepath: str, subtitles_filepath: str):
 
 
 def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str):
-    def generator(text): return TextClip(txt=text, font='Courier', fontsize=100,
+    def generator(text): return TextClip(txt=text, font='roboto', fontsize=100,
                                          color='white', stroke_color='black', stroke_width=5, method='caption')
     subtitles = SubtitlesClip(subtitles_filepath, generator)
     video = VideoFileClip(video_filepath)

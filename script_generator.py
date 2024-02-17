@@ -15,9 +15,9 @@ safety_settings = {
 }
 
 generation_config: GenerationConfigType = {
-    'max_output_tokens': 200,
-    'temperature': 1 
+    'temperature': 1
 }
+
 
 def generate_script():
     genai.configure(api_key=GOOGLE_API_KEY)
@@ -39,6 +39,8 @@ def generate_script():
 
 if __name__ == '__main__':
     script = generate_script()
+    # print(script)
     print(script['title'])
     print(script['content'])
+    # print(script['sentences'])
     print(script['keywords'])

@@ -1,6 +1,7 @@
 import requests
 import base64
 from moviepy.editor import AudioFileClip
+import re
 
 ENDPOINT = 'https://tiktok-tts.weilnet.workers.dev/api/generation'
 TEXT_CHAR_LIMIT = 299
@@ -9,18 +10,19 @@ TEXT_CHAR_LIMIT = 299
 
 
 def split_text(text: str, chunk_size: int):
-    words = text.split(" ")
+    # words = text.split(" ")
+    sentences = re.split(r'([.!?])', text)
     text_chunks = []
     current_chunk = ""
-    for word in words:
-        if (len(current_chunk) + len(word) <= chunk_size):
+    for sentence in sentences:
+        if (len(current_chunk) + len(sentence) <= chunk_size):
             # Add to current chunk
-            current_chunk += ' ' + word
+            current_chunk += ' ' + sentence
         else:
             # Add current chunk to all chunks and start a new chunk
             if current_chunk:
                 text_chunks.append(current_chunk.strip())
-            current_chunk = word
+            current_chunk = sentence
     if current_chunk:
         text_chunks.append(current_chunk.strip())
     return text_chunks
@@ -42,7 +44,9 @@ def text_to_speech(text: str, audio_filepath: str):
             encoded_audio = generate_voice(text)
         else:
             text_chunks = split_text(text, chunk_size=TEXT_CHAR_LIMIT)
-            encoded_audio = ''.join([generate_voice(text_chunk) for text_chunk in text_chunks])
+            print(text_chunks)
+            encoded_audio = ''.join([generate_voice(text_chunk)
+                                    for text_chunk in text_chunks])
 
         audio_bytes = base64.b64decode(encoded_audio)
         with open(audio_filepath, 'wb') as file:
@@ -55,6 +59,6 @@ def text_to_speech(text: str, audio_filepath: str):
 
 
 if __name__ == '__main__':
-    text = "hello world"
+    text = "Here's a mind-blowing fact about multitasking: it's not as effective as it seems! Our brains aren't designed to handle multiple tasks simultaneously. When we think we're multitasking, we're actually rapidly switching between tasks, which can decrease overall productivity. Research shows that focusing on one task at a time leads to better results. So, next time you feel like a multitasking master, remember, your brain might thank you for giving it a break and focusing on one thing at a time."
     audio_filepath = 'output/audio/voiceover.mp3'
     text_to_speech(text, audio_filepath)
