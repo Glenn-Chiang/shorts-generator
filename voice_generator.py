@@ -59,6 +59,6 @@ def text_to_speech(text: str, audio_filepath: str):
 
 
 if __name__ == '__main__':
-    text = "Here's a mind-blowing fact about multitasking: it's not as effective as it seems! Our brains aren't designed to handle multiple tasks simultaneously. When we think we're multitasking, we're actually rapidly switching between tasks, which can decrease overall productivity. Research shows that focusing on one task at a time leads to better results. So, next time you feel like a multitasking master, remember, your brain might thank you for giving it a break and focusing on one thing at a time."
+    text = "It's not a lack of compassion; our minds often assume someone else will step in .  Understanding this effect helps us realize the importance of taking personal responsibility in emergencies ."
     audio_filepath = 'output/audio/voiceover.mp3'
     text_to_speech(text, audio_filepath)

@@ -31,5 +31,9 @@ Format your response in the json format shown below.
     'content': "Imagine you're asked to guess a number between 1 and 100. Before you make your guess, someone randomly says the number 85. Guess what? Your guess is likely to be higher than if they had said a smaller number like 10. This is the anchoring effect - our minds tend to use the first piece of information we receive as a reference point, even if it's arbitrary. Understanding this bias can help you make more informed decisions and avoid being unduly influenced by initial information.", 
     'keywords': ['number', 'scale']
 }
-
+{
+    'title': 'The Forer Effect: Self-Validation Bias',
+    'content': 'Ever been fooled by a vague horoscope or personality test that seems to describe you perfectly? That's likely the Forer Effect at play. It's our tendency to find personal meaning in general statements, even if they apply to most people. Understanding this bias helps us stay grounded and not fall prey to overly personalized claims.',
+    'keywords': ['horoscope']
+}
 The keywords field should contain 1 to 3 search terms for concrete objects related to the content.

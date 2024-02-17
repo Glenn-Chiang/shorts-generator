@@ -25,8 +25,8 @@ def generate_subtitles(audio_filepath: str, subtitles_filepath: str):
 
 
 def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str):
-    def generator(text): return TextClip(txt=text, font='roboto', fontsize=100,
-                                         color='white', stroke_color='black', stroke_width=5, method='caption')
+    def generator(text): return TextClip(txt=text, font='Segoe-UI-Bold', fontsize=100,
+                                         color='white', bg_color='black', stroke_color='black', stroke_width=5, method='caption')
     subtitles = SubtitlesClip(subtitles_filepath, generator)
     video = VideoFileClip(video_filepath)
     subtitled_video = CompositeVideoClip(
@@ -39,6 +39,8 @@ if __name__ == '__main__':
     subtitles_filepath = 'output/subtitles/subtitles.srt'
     video_filepath = 'output/video/video.mp4'
     final_output_filepath = 'output/final/final.mp4'
-    subtitled_video = burn_subtitles_into_video(video_filepath=video_filepath, subtitles_filepath=subtitles_filepath)
-    
-    subtitled_video.write_videofile(filename=final_output_filepath, fps=30)
+
+    print(TextClip.list('font'))
+    print(TextClip.list('color'))
+    # subtitled_video = burn_subtitles_into_video(video_filepath=video_filepath, subtitles_filepath=subtitles_filepath)
+    # subtitled_video.write_videofile(filename=final_output_filepath, fps=30)
