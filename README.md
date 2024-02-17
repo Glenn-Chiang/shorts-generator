@@ -11,3 +11,27 @@ A script that generates short videos with voice-over narration, background image
 - Compiles stock photos into a video using moviepy
 - Generates subtitles with timestamps in .srt format using the AssemblyAI speech-to-text API
 - Burns subtitles into the video and adds the voice-over audio using moviepy
+
+# Getting started
+## Obtaining required API keys
+Obtain API keys for the following:
+- [Google Gemini API](https://aistudio.google.com/app/apikey)
+- [Pexels API](https://pexels.com/api)
+- [AssemblyAI API](https://assemblyai.com/pricing)
+## Installation and setup
+1. Clone the repository and navigate to the project directory
+```
+git clone https://github.com/Glenn-Chiang/shorts-generator.git
+cd shorts-generator
+```
+2. Create a `.env` file and fill in the values for the required API keys. Refer to `.env.example`.
+3. Create a virtual environment and install dependencies
+```
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+```
+## Usage
+```
+python main.py
+```
