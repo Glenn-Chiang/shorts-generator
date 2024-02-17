@@ -14,7 +14,7 @@ def generate_subtitles(audio_filepath: str, subtitles_filepath: str):
         aai.settings.api_key = ASSEMBLY_AI_API_KEY
         transciber = aai.Transcriber()
         transcript = transciber.transcribe(audio_filepath)
-        print(transcript.text)
+        # print(transcript.text)
         subtitles = transcript.export_subtitles_srt(chars_per_caption=30)
 
         with open(subtitles_filepath, 'w') as file:
