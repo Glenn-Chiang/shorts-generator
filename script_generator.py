@@ -1,6 +1,6 @@
 import json
 import google.generativeai as genai
-from google.generativeai.types import HarmCategory, HarmBlockThreshold
+from google.generativeai.types import HarmCategory, HarmBlockThreshold, GenerationConfigType
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -14,18 +14,21 @@ safety_settings = {
     HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
 }
 
+generation_config: GenerationConfigType = {
+    'max_output_tokens': 200,
+    'temperature': 1 
+}
 
 def generate_script():
     genai.configure(api_key=GOOGLE_API_KEY)
     model = genai.GenerativeModel('gemini-pro')
 
-    prompt = ""
     with open('prompt.txt', 'r') as prompt_file:
         prompt = prompt_file.read()
 
     try:
         response = model.generate_content(
-            prompt, safety_settings=safety_settings)
+            prompt, safety_settings=safety_settings, generation_config=generation_config)
         response_text = response.text
         return json.loads(response_text)
 
@@ -35,4 +38,7 @@ def generate_script():
 
 
 if __name__ == '__main__':
-    generate_script()
+    script = generate_script()
+    print(script['title'])
+    print(script['content'])
+    print(script['keywords'])

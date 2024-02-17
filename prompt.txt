@@ -1,29 +1,35 @@
-Write a transcript for a short video that gives an engaging, bite-sized breakdown of a relatable psychology fact related to personality, behaviour or relationships.
-Format your response in the json format shown by the examples below.
+Write a transcript for a video that gives an engaging, bite-sized breakdown of a cool psychology fact.
 Use short, simple sentences that are easy to understand.
+Format your response in the json format shown below.
 {
-    "title": "Why do we crave connection?",
-    "content": "Why do we crave connection with others? Being part of a group or having close relationships provides us with a sense of safety and belonging. It makes us feel valued and reduces feelings of loneliness. Our relationships shape our identity and give us a sense of purpose. They help us understand who we are and what our place in the world is.",
-    "keywords": ["personal connection", "relationships"]
+    "title": "The Illusion of Multitasking",
+    "content": "Here's a mind-blowing fact about multitasking: it's not as effective as it seems! Our brains aren't designed to handle multiple tasks simultaneously. When we think we're multitasking, we're actually rapidly switching between tasks, which can decrease overall productivity. Research shows that focusing on one task at a time leads to better results. So, next time you feel like a multitasking master, remember, your brain might thank you for giving it a break and focusing on one thing at a time.",
+    "keywords": ["office desk", "brain illustration"]
 }
 {
-    "title": "What is imposter syndrome?",
-    "content": "Do you often feel like a 'fraud' even when you do well? You might be suffering from imposter syndrome. Imposter syndrome is that uncomfortable feeling you experience when you think you're unqualified and incompetent, even when you're actually performing well. You might look around and assume everyone knows what they're doing except you. And if you achieve something good, you'll chalk your accomplishments up to 'good luck.'",
-    "keywords": ["imposter syndrome", "insecurity"]
+    "title": "Mirror Neurons: Empathy Unveiled",
+    "content": "Ever wonder why we feel a connection when watching someone else experience joy or pain? Enter mirror neurons, the brain cells that light up both when we perform an action and when we see someone else do it. These neurons create a neural bridge, fostering empathy. So, the next time you feel a shared emotion while watching a movie, you can thank your mirror neurons for making you feel connected to the characters.",
+    "keywords": ["mirror", "brain cells", "empathy"]
 }
 {
-    "title": "Why do we proscrastinate?",
-    "content: "Procrastination isn't a sign of laziness or poor time management. Our brains are actually wired to seek instant gratification and avoid challenging tasks. Procrastinating can give us a surge of dopamine, which feels rewarding in the moment. It's like a quick fix even if we know it's not helpful in the long run. Finding ways to reward yourself for completing small tasks can help you break the cycle of procrastination",
-    "keywords": ["procrastination"]
+    "title": "Cognitive Dissonance: The Mind's Battle",
+    "content": "Picture this: holding conflicting beliefs creates discomfort in our minds. This is known as cognitive dissonance. To ease this discomfort, our brains tend to change our attitudes to align with our actions or find justifications. It's a mental gymnastics routine to maintain internal harmony. Understanding cognitive dissonance gives us insight into how our minds navigate the complexities of belief and behavior.",
+    "keywords": ["conflicting thoughts", "mental struggle"]
 }
 {
-    "title": "Why do we like gossip?",
-    "content": ""Gossiping can make us feel closer to others and give us a sense of belonging. When we gossip, we're essentially sharing information about other people, which can make us feel like we're part of an 'in' group. It can also make us feel superior to the person we're gossiping about. However, excessive gossiping can be damaging to relationships and even lead to social isolation.",
-    "keywords": ["gossip", "talking"]
+    "title": "Placebo Effect: The Power of Belief",
+    "content": "Did you know that a sugar pill can sometimes be as effective as a real medication? This is the placebo effect, where the belief in the treatment itself can lead to positive outcomes. Our minds have a remarkable ability to influence our bodies. The next time you experience the placebo effect, it's a testament to the incredible connection between mind and body.",
+    "keywords": ["pills"]
 }
 {
-    "title": "The secret of love?",
-    "content": "Did you know that people who spend time looking into each other's eyes experience a chemical reaction in their brains? This reaction is linked to increased intimacy and a surge in oxytocin, known as the "love hormone." So next time you're with your loved one, don't be afraid to lock eyes and hold their gaze.",
-    "keywords": ["love", "eye contact"]
+    "title": "The Cocktail Party Effect",
+    "content": "Ever been at a noisy party and still managed to hear your name across the room? That's the Cocktail Party Effect in action. Our brains are exceptional at focusing on a single conversation amidst background noise. It's like a mental spotlight that helps us tune in to specific information. So, next time you're in a crowded space, marvel at your brain's ability to pick out the important bits.",
+    "keywords": ["party"]
 }
-The keywords field should contain a list of keywords related to the content that can be used like search terms.
+{
+    'title': 'The Anchoring Effect: A Bias in Judgment', 
+    'content': "Imagine you're asked to guess a number between 1 and 100. Before you make your guess, someone randomly says the number 85. Guess what? Your guess is likely to be higher than if they had said a smaller number like 10. This is the anchoring effect - our minds tend to use the first piece of information we receive as a reference point, even if it's arbitrary. Understanding this bias can help you make more informed decisions and avoid being unduly influenced by initial information.", 
+    'keywords': ['number', 'scale']
+}
+
+The keywords field should contain 1 to 3 search terms for concrete objects related to the content.
