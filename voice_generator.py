@@ -44,7 +44,6 @@ def text_to_speech(text: str, audio_filepath: str):
             encoded_audio = generate_voice(text)
         else:
             text_chunks = split_text(text, chunk_size=TEXT_CHAR_LIMIT)
-            print(text_chunks)
             encoded_audio = ''.join([generate_voice(text_chunk)
                                     for text_chunk in text_chunks])
 

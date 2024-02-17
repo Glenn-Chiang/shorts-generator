@@ -35,7 +35,6 @@ def main():
     # Generate voice-over narration using text-to-speech
     print("Generating voice-over narration...")
     audio = text_to_speech(text=video_script, audio_filepath=audio_filepath)
-    audio = audio.subclip(0, audio.duration - 0.05) # For some reason we need to clip the audio at tne end to avoid a weird audio glitch at the end
     # Compute number of images required to fit voiceover duration, given that each image is displayed for x seconds
     number_of_images_required: int = math.ceil(audio.duration / seconds_per_image)
     
@@ -63,6 +62,7 @@ def main():
     print("Burning subtitles...")
     subtitled_video = burn_subtitles_into_video(video_filepath=video_filepath, subtitles_filepath=subtitles_filepath)    
 
+    audio = audio.subclip(0, audio.duration - 0.05) # For some reason we need to clip the audio at tne end to avoid a weird audio glitch at the end
     final_video = subtitled_video.set_audio(audio)
     final_video.write_videofile(final_output_filepath, fps=30)
 
