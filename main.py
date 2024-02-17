@@ -5,14 +5,17 @@ from video_maker import images_to_video
 from voice_generator import text_to_speech
 from subtitle_generator import generate_subtitles, burn_subtitles_into_video
 import math
+from uuid import uuid4
+
 
 def main():
     video_size = (1080, 1920)
     seconds_per_image = 4
-    audio_filepath = 'output/audio/voiceover.mp3'
-    video_filepath = "output/video/video.mp4"
-    subtitles_filepath = 'output/subtitles/subtitles.srt'
-    final_output_filepath = 'output/final/video.mp4'
+    video_id = uuid4()
+    audio_filepath = f'output/audio/{video_id}.mp3'
+    video_filepath = f'output/video/{video_id}.mp4'
+    subtitles_filepath = f'output/subtitles/{video_id}.srt'
+    final_output_filepath = f'output/final/{video_id}.mp4'
 
     print('Generating script...')
     try:
@@ -32,7 +35,7 @@ def main():
     # Generate voice-over narration using text-to-speech
     print("Generating voice-over narration...")
     audio = text_to_speech(text=video_script, audio_filepath=audio_filepath)
-
+    audio = audio.subclip(0, audio.duration - 0.05) # For some reason we need to clip the audio at tne end to avoid a weird audio glitch at the end
     # Compute number of images required to fit voiceover duration, given that each image is displayed for x seconds
     number_of_images_required: int = math.ceil(audio.duration / seconds_per_image)
     

@@ -15,7 +15,7 @@ safety_settings = {
 }
 
 generation_config: GenerationConfigType = {
-    'temperature': 1
+    'temperature': 1.0,
 }
 
 

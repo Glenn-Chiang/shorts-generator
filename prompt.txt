@@ -12,25 +12,11 @@ Format your response in the json format shown below.
     "keywords": ["mirror", "brain cells", "empathy"]
 }
 {
-    "title": "Cognitive Dissonance: The Mind's Battle",
-    "content": "Picture this: holding conflicting beliefs creates discomfort in our minds. This is known as cognitive dissonance. To ease this discomfort, our brains tend to change our attitudes to align with our actions or find justifications. It's a mental gymnastics routine to maintain internal harmony. Understanding cognitive dissonance gives us insight into how our minds navigate the complexities of belief and behavior.",
-    "keywords": ["conflicting thoughts", "mental struggle"]
-}
-{
     "title": "Placebo Effect: The Power of Belief",
     "content": "Did you know that a sugar pill can sometimes be as effective as a real medication? This is the placebo effect, where the belief in the treatment itself can lead to positive outcomes. Our minds have a remarkable ability to influence our bodies. The next time you experience the placebo effect, it's a testament to the incredible connection between mind and body.",
     "keywords": ["pills"]
 }
-{
-    "title": "The Cocktail Party Effect",
-    "content": "Ever been at a noisy party and still managed to hear your name across the room? That's the Cocktail Party Effect in action. Our brains are exceptional at focusing on a single conversation amidst background noise. It's like a mental spotlight that helps us tune in to specific information. So, next time you're in a crowded space, marvel at your brain's ability to pick out the important bits.",
-    "keywords": ["party"]
-}
-{
-    'title': 'The Anchoring Effect: A Bias in Judgment', 
-    'content': "Imagine you're asked to guess a number between 1 and 100. Before you make your guess, someone randomly says the number 85. Guess what? Your guess is likely to be higher than if they had said a smaller number like 10. This is the anchoring effect - our minds tend to use the first piece of information we receive as a reference point, even if it's arbitrary. Understanding this bias can help you make more informed decisions and avoid being unduly influenced by initial information.", 
-    'keywords': ['number', 'scale']
-}
+
 {
     'title': 'The Forer Effect: Self-Validation Bias',
     'content': 'Ever been fooled by a vague horoscope or personality test that seems to describe you perfectly? That's likely the Forer Effect at play. It's our tendency to find personal meaning in general statements, even if they apply to most people. Understanding this bias helps us stay grounded and not fall prey to overly personalized claims.',
