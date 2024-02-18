@@ -1,7 +1,7 @@
 import sys
 from script_generator import generate_script
 from image_fetcher import fetch_images
-from video_maker import images_to_video, burn_subtitles_into_video
+from video_maker import burn_subtitles_into_video, create_video
 from voice_generator import text_to_speech
 from subtitle_generator import generate_subtitles
 import math
@@ -50,15 +50,11 @@ def main():
         sys.exit()
 
     print("Compiling images to video...")
-    video = images_to_video(
-        image_urls=image_urls, video_size=video_size, fps=1/seconds_per_image)
-    # Cut excess video to exactly match audio duration
-    video.subclip(0, audio.duration)
-    video.write_videofile(video_filepath)
+    create_video(image_urls=image_urls, audio_duration=int(audio.duration), video_size=video_size, video_filepath=video_filepath)
 
     # Generate subtitles based on audio file
     print("Generating subtitles...")
-    subtitles = generate_subtitles(audio_filepath, subtitles_filepath)    
+    generate_subtitles(audio_filepath, subtitles_filepath)    
 
     # Burn subtitles into video
     print("Burning subtitles...")
@@ -66,7 +62,7 @@ def main():
 
     audio = audio.subclip(0, audio.duration - 0.05) # For some reason we need to clip the audio at tne end to avoid a weird audio glitch at the end
     final_video = subtitled_video.set_audio(audio)
-    final_video.write_videofile(final_output_filepath, fps=30)
+    final_video.write_videofile(final_output_filepath)
 
 
 if __name__ == '__main__':

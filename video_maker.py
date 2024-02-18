@@ -26,7 +26,7 @@ def images_to_video(image_urls: List[str], video_size: Tuple[int, int], fps: flo
             image = get_image_from_url(image_url)
             images.append(image)
         except Exception as error:
-            print(f"Error getting image from url: {image_url}")
+            print(f"Error getting image from url: {image_url}", error)
 
     images = [resize_image(image, video_size) for image in images]
     # for index, image in enumerate(images):
@@ -50,6 +50,7 @@ def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str):
 
 
 def get_random_clip(audio_duration: int):
+    # Randomly select a video from assets
     saved_videos = os.listdir('assets')
     random_video_path = f'assets/{random.choice(saved_videos)}'
     video = VideoFileClip(random_video_path)
@@ -76,6 +77,8 @@ def create_video(image_urls: List[str], audio_duration: int, video_size: Tuple[i
     combined_video.write_videofile(video_filepath)
     return combined_video
 
+def combine_videos():
+    ...
 
 def main():
     video_filepath = r'output\video\c8825c83-7019-4972-b2d0-0b07e64f909a.mp4'
