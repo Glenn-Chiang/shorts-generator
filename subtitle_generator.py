@@ -1,5 +1,4 @@
-from moviepy.editor import CompositeVideoClip, TextClip, VideoFileClip
-from moviepy.video.tools.subtitles import SubtitlesClip
+from moviepy.editor import TextClip
 import assemblyai as aai
 import os
 from dotenv import load_dotenv
@@ -15,7 +14,7 @@ def generate_subtitles(audio_filepath: str, subtitles_filepath: str):
         transciber = aai.Transcriber()
         transcript = transciber.transcribe(audio_filepath)
         # print(transcript.text)
-        subtitles = transcript.export_subtitles_srt(chars_per_caption=30)
+        subtitles = transcript.export_subtitles_srt(chars_per_caption=20)
 
         with open(subtitles_filepath, 'w') as file:
             file.write(subtitles)
