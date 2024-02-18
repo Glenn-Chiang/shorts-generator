@@ -1,8 +1,9 @@
 from typing import List, Tuple
 import requests
-from moviepy.editor import ImageSequenceClip
 from PIL import Image
 import numpy as np
+from moviepy.editor import CompositeVideoClip, TextClip, VideoFileClip, ImageSequenceClip
+from moviepy.video.tools.subtitles import SubtitlesClip
 
 
 def get_image_from_url(image_url: str):
@@ -32,15 +33,26 @@ def images_to_video(image_urls: List[str], video_size: Tuple[int, int], fps: flo
     return image_sequence
 
 
+def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str):
+    video = VideoFileClip(video_filepath)
+
+    def generator(text): return TextClip(txt=text, font='Segoe-UI-Bold', fontsize=100,
+                                         color='white', stroke_color='black', stroke_width=5,
+                                         method='caption', align='center', size=video.size)
+
+    subtitles = SubtitlesClip(subtitles_filepath, generator)
+    subtitled_video = CompositeVideoClip(
+        [video, subtitles.set_position(('center', 'center'))])
+    return subtitled_video
+
+
 def main():
-    video_title = 'video-title'
-    video_filepath = f'output/{video_title}.mp4'
-    video_size = (1080, 1920)
-    fps = 1/4
-    image_urls = ['https://images.pexels.com/photos/265722/pexels-photo-265722.jpeg', 'https://images.pexels.com/photos/704748/pexels-photo-704748.jpeg',
-                  'https://images.pexels.com/photos/258421/pexels-photo-258421.jpeg', 'https://images.pexels.com/photos/1187079/pexels-photo-1187079.jpeg', 'https://images.pexels.com/photos/1024984/pexels-photo-1024984.jpeg']
-    image_sequence = images_to_video(image_urls, video_size=video_size, fps=fps)
-    image_sequence.write_videofile(video_filepath)
+    video_filepath = r'output\video\c8825c83-7019-4972-b2d0-0b07e64f909a.mp4'
+    subtitles_filepath = r'output\subtitles\c8825c83-7019-4972-b2d0-0b07e64f909a.srt'
+    final = burn_subtitles_into_video(
+        video_filepath=video_filepath, subtitles_filepath=subtitles_filepath)
+    final.write_videofile(
+        r'output\final\c8825c83-7019-4972-b2d0-0b07e64f909a.mp4')
 
 
 if __name__ == '__main__':

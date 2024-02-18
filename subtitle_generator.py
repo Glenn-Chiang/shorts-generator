@@ -25,16 +25,6 @@ def generate_subtitles(audio_filepath: str, subtitles_filepath: str):
         print("Error generating subtitles:", error)
 
 
-def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str):
-    def generator(text): return TextClip(txt=text, font='Segoe-UI-Bold', fontsize=100,
-                                         color='white', bg_color='black', stroke_color='black', stroke_width=5, method='caption')
-    subtitles = SubtitlesClip(subtitles_filepath, generator)
-    video = VideoFileClip(video_filepath)
-    subtitled_video = CompositeVideoClip(
-        [video, subtitles.set_position(('center', 'center'))])
-    return subtitled_video
-
-
 if __name__ == '__main__':
     audio_filepath = 'output/audio/voiceover.mp3'
     subtitles_filepath = 'output/subtitles/subtitles.srt'

@@ -1,9 +1,9 @@
 import sys
 from script_generator import generate_script
 from image_fetcher import fetch_images
-from video_maker import images_to_video
+from video_maker import images_to_video, burn_subtitles_into_video
 from voice_generator import text_to_speech
-from subtitle_generator import generate_subtitles, burn_subtitles_into_video
+from subtitle_generator import generate_subtitles
 import math
 from uuid import uuid4
 
@@ -52,6 +52,8 @@ def main():
     print("Compiling images to video...")
     video = images_to_video(
         image_urls=image_urls, video_size=video_size, fps=1/seconds_per_image)
+    # Cut excess video to exactly match audio duration
+    video.subclip(0, audio.duration)
     video.write_videofile(video_filepath)
 
     # Generate subtitles based on audio file
