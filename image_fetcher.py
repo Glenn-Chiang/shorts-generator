@@ -10,7 +10,7 @@ def fetch_images(query: str, number_of_images: int):
     try:
         response = requests.get("https://api.pexels.com/v1/search",
                                 params={
-                                    'query': query, 'orientation': 'portrait', 'per_page': number_of_images},
+                                    'query': query, 'orientation': 'square', 'per_page': number_of_images},
                                 headers={'Authorization': API_KEY})
         response.raise_for_status()
         response_data = response.json()

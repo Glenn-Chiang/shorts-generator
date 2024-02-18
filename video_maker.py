@@ -6,6 +6,7 @@ import requests
 from moviepy.editor import (CompositeVideoClip, ImageSequenceClip, TextClip,
                             VideoFileClip, clips_array)
 from moviepy.video.tools.subtitles import SubtitlesClip
+from moviepy.video.fx.all import crop
 from PIL import Image
 
 
@@ -49,42 +50,55 @@ def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str):
     return subtitled_video
 
 
-def get_random_clip(audio_duration: int):
+def get_random_clip(required_duration: int) -> VideoFileClip:
     # Randomly select a video from assets
     saved_videos = os.listdir('assets')
     random_video_path = f'assets/{random.choice(saved_videos)}'
     video = VideoFileClip(random_video_path)
     video_duration = int(video.duration)
     # If audio duration is longer than full video duration, just clip the full video
-    if (audio_duration > video_duration):
+    if (required_duration > video_duration):
         return video
 
     # Randomly extract a clip from the video that matches the audio duration
-    clip_start = random.randint(0, video_duration - audio_duration)
-    clip: VideoFileClip = video.subclip(clip_start, clip_start + audio_duration)
+    clip_start = random.randint(0, video_duration - required_duration)
+    clip: VideoFileClip = video.subclip(
+        clip_start, clip_start + required_duration)
     return clip
 
 
-def create_video(image_urls: List[str], audio_duration: int, video_size: Tuple[int, int], video_filepath: str):
+def crop_clip(clip: VideoFileClip, target_size: Tuple[int,int]):
+    original_width, original_height = clip.size
+    target_width, target_height = target_size
+    # Crop to desired size from center
+    x1 = (original_width - target_width) // 2 if target_width < original_width else 0
+    x2 = original_width - x1
+    y1 = (original_height - target_height) // 2 if target_height < original_height else 0
+    y2 = original_height - y1
+    cropped_clip = crop(clip, x1=x1, y1=y1, x2=x2, y2=y2)
+    return cropped_clip
+
+
+def create_video(image_urls: List[str], audio_duration: int, video_filepath: str):
+    video_size = (1080,1920)
     # Video containing relevant stock images
     images_video = images_to_video(
-        image_urls=image_urls, video_size=video_size)
-    # Random dopamine-stimulating video
-    random_video = get_random_clip(audio_duration=audio_duration)
+        image_urls=image_urls, video_size=(1080,1200))
+    # Random video from assets
+    random_video = get_random_clip(required_duration=audio_duration).resize((1080,720))
     # Combines videos
     combined_video = clips_array([[random_video], [images_video]])
-    combined_video.subclip(0, audio_duration)
+    # Cut off any excess video that exceeds audio duration
+    combined_video = combined_video.subclip(0, audio_duration)
+    # Resize
+    # combined_video: VideoFileClip = combined_video
     combined_video.write_videofile(video_filepath)
     return combined_video
 
-def combine_videos():
-    ...
 
 def main():
-    video_filepath = r'output\video\c8825c83-7019-4972-b2d0-0b07e64f909a.mp4'
-    subtitles_filepath = r'output\subtitles\c8825c83-7019-4972-b2d0-0b07e64f909a.srt'
-    video = get_random_clip(10)
-    video.write_videofile('output/video/test_clip.mp4')
+    ...
 
+    
 if __name__ == '__main__':
     main()

@@ -50,7 +50,7 @@ def main():
         sys.exit()
 
     print("Compiling images to video...")
-    create_video(image_urls=image_urls, audio_duration=int(audio.duration), video_size=video_size, video_filepath=video_filepath)
+    create_video(image_urls=image_urls, audio_duration=int(audio.duration), video_filepath=video_filepath)
 
     # Generate subtitles based on audio file
     print("Generating subtitles...")
@@ -63,7 +63,7 @@ def main():
     audio = audio.subclip(0, audio.duration - 0.05) # For some reason we need to clip the audio at tne end to avoid a weird audio glitch at the end
     final_video = subtitled_video.set_audio(audio)
     final_video.write_videofile(final_output_filepath)
-
+    print(final_video.size)
 
 if __name__ == '__main__':
     main()
