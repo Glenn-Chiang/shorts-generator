@@ -27,6 +27,7 @@ def generate_video(topic: str):
         print(keywords)
         if not video_script or not keywords:
             print("Error generating script")
+            sys.exit()
 
     except Exception as error:
         print("Error generating script:", error)
@@ -61,10 +62,8 @@ def generate_video(topic: str):
 
     # Burn subtitles into video
     print("Burning subtitles...")
-    video = burn_subtitles_into_video(
-        video_filepath=video_filepath, subtitles_filepath=subtitles_filepath)
-
-    video.write_videofile(final_output_filepath)
+    burn_subtitles_into_video(
+        video_filepath=video_filepath, subtitles_filepath=subtitles_filepath, final_output_filepath=final_output_filepath)
 
 
 def main():

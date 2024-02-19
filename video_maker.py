@@ -91,7 +91,7 @@ def create_video(image_urls: List[str], seconds_per_image: int, audio_filepath: 
     return combined_video
 
 
-def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str):
+def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str, final_output_filepath: str):
     video = VideoFileClip(video_filepath)
 
     def generator(text): return TextClip(txt=text, font='Segoe-UI-Bold', fontsize=100,
@@ -103,6 +103,8 @@ def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str):
         [video, subtitles.set_position(('center', 'center'))])
 
     final_video = final_video.subclip(0,-0.05)
+    final_video.write_videofile(final_output_filepath)
+
     return final_video
 
 
