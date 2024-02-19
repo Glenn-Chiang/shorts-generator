@@ -35,3 +35,6 @@ pip install -r requirements.txt
 ```
 python main.py
 ```
+
+# Disclaimer
+This project relies on experimental generative AI technology which may occasionally produce malformed output that breaks the script.

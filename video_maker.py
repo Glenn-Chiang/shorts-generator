@@ -1,10 +1,11 @@
 from typing import List, Tuple
 import os
+import math
 import random
 import numpy as np
 import requests
 from moviepy.editor import (CompositeVideoClip, ImageSequenceClip, TextClip,
-                            VideoFileClip, clips_array)
+                            VideoFileClip, clips_array, AudioFileClip, CompositeAudioClip)
 from moviepy.video.tools.subtitles import SubtitlesClip
 from moviepy.video.fx.all import crop
 from PIL import Image
@@ -37,19 +38,6 @@ def images_to_video(image_urls: List[str], video_size: Tuple[int, int], fps: flo
     return image_sequence
 
 
-def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str):
-    video = VideoFileClip(video_filepath)
-
-    def generator(text): return TextClip(txt=text, font='Segoe-UI-Bold', fontsize=100,
-                                         color='white', stroke_color='black', stroke_width=5,
-                                         method='caption', align='center', size=video.size)
-
-    subtitles = SubtitlesClip(subtitles_filepath, generator)
-    subtitled_video = CompositeVideoClip(
-        [video, subtitles.set_position(('center', 'center'))])
-    return subtitled_video
-
-
 def get_random_clip(required_duration: int) -> VideoFileClip:
     # Randomly select a video from asset videos
     saved_videos = os.listdir('assets/video')
@@ -67,34 +55,60 @@ def get_random_clip(required_duration: int) -> VideoFileClip:
     return clip
 
 
-def crop_clip(clip: VideoFileClip, target_size: Tuple[int,int]):
+def crop_clip(clip: VideoFileClip, target_size: Tuple[int, int]):
     original_width, original_height = clip.size
     target_width, target_height = target_size
     # Crop to desired size from center
     x1 = (original_width - target_width) // 2 if target_width < original_width else 0
     x2 = original_width - x1
-    y1 = (original_height - target_height) // 2 if target_height < original_height else 0
+    y1 = (original_height -
+          target_height) // 2 if target_height < original_height else 0
     y2 = original_height - y1
     cropped_clip = crop(clip, x1=x1, y1=y1, x2=x2, y2=y2)
     return cropped_clip
 
 
-def create_video(image_urls: List[str], seconds_per_image: int, audio_duration: int, video_filepath: str):
-    video_size = (1080,1920)
+def create_video(image_urls: List[str], seconds_per_image: int, audio_filepath: str, video_filepath: str):
+    audio_clip = AudioFileClip(audio_filepath)
     # Video containing relevant stock images
     images_video = images_to_video(
-        image_urls=image_urls, video_size=(1080,1200), fps=1/seconds_per_image)
+        image_urls=image_urls, video_size=(1080, 1200), fps=1/seconds_per_image)
     # Random video from assets
-    random_video = get_random_clip(required_duration=audio_duration).resize((1080,720))
-    # Combines videos
-    combined_video = clips_array([[random_video], [images_video]])
+    random_video = get_random_clip(
+        required_duration=math.ceil(audio_clip.duration)).resize((1080, 720))
+
+    # Combine videos and match exact audio duration
+    combined_video = clips_array([[random_video], [images_video]]).subclip(0, audio_clip.duration)
+
+    # Combine original audio with text-to-speech audio
+    combined_audio = CompositeAudioClip([combined_video.audio, audio_clip])
+
+    # Add combined audio to video
+    # For some reason we need to clip the audio at the end to avoid a weird stutter
+    combined_video.audio = combined_audio.subclip(0,-0.05)
+
     combined_video.write_videofile(video_filepath)
     return combined_video
+
+
+def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str):
+    video = VideoFileClip(video_filepath)
+
+    def generator(text): return TextClip(txt=text, font='Segoe-UI-Bold', fontsize=100,
+                                         color='white', stroke_color='black', stroke_width=5,
+                                         method='caption', align='center', size=video.size)
+
+    subtitles = SubtitlesClip(subtitles_filepath, generator)
+    final_video = CompositeVideoClip(
+        [video, subtitles.set_position(('center', 'center'))])
+
+    final_video = final_video.subclip(0,-0.05)
+    return final_video
 
 
 def main():
     ...
 
-    
+
 if __name__ == '__main__':
     main()

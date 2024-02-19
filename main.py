@@ -1,11 +1,11 @@
+import math
 import sys
-from script_generator import generate_script
+from uuid import uuid4
 from image_fetcher import fetch_images
+from script_generator import generate_script
+from subtitle_generator import generate_subtitles
 from video_maker import burn_subtitles_into_video, create_video
 from voice_generator import text_to_speech
-from subtitle_generator import generate_subtitles
-import math
-from uuid import uuid4
 
 
 def generate_video(topic: str):
@@ -25,6 +25,8 @@ def generate_video(topic: str):
         print(video_title)
         print(video_script)
         print(keywords)
+        if not video_script or not keywords:
+            print("Error generating script")
 
     except Exception as error:
         print("Error generating script:", error)
@@ -32,10 +34,11 @@ def generate_video(topic: str):
 
     # Generate voice-over narration using text-to-speech
     print("Generating voice-over narration...")
-    audio = text_to_speech(text=video_script, audio_filepath=audio_filepath)
+    tts_audio = text_to_speech(
+        text=video_script, audio_filepath=audio_filepath)
     # Compute number of images required to fit voiceover duration, given that each image is displayed for x seconds
     number_of_images_required: int = math.ceil(
-        audio.duration / seconds_per_image)
+        tts_audio.duration / seconds_per_image)
 
     # Generate search terms based on video script
     images_query = keywords[0]
@@ -48,9 +51,9 @@ def generate_video(topic: str):
         print('No images found')
         sys.exit()
 
-    print("Compiling images to video...")
+    print("Creating video...")
     create_video(image_urls=image_urls, seconds_per_image=seconds_per_image,
-                 audio_duration=math.ceil(audio.duration), video_filepath=video_filepath)
+                 audio_filepath=audio_filepath, video_filepath=video_filepath)
 
     # Generate subtitles based on audio file
     print("Generating subtitles...")
@@ -61,10 +64,7 @@ def generate_video(topic: str):
     video = burn_subtitles_into_video(
         video_filepath=video_filepath, subtitles_filepath=subtitles_filepath)
 
-    # For some reason we need to clip the audio at the end to avoid a weird stutter
-    audio = audio.subclip(0, audio.duration - 0.05)
-    final_video = video.set_audio(audio)
-    final_video.write_videofile(final_output_filepath)
+    video.write_videofile(final_output_filepath)
 
 
 def main():
