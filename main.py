@@ -71,7 +71,7 @@ def main():
     topic_word_limit = 5
     while True:
         topic = input('Enter a topic: ')
-        if (len(topic.split(' ')) < topic_word_limit):
+        if (len(topic.split(' ')) <= topic_word_limit):
             break
         print(f'Topic must be {topic_word_limit} or less')
     generate_video(topic=topic)

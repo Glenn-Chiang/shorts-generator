@@ -1,7 +1,7 @@
 Write a transcript for a video that gives a fun, engaging, bite-sized breakdown of the given topic.
 Use short, simple sentences that are easy to understand, similar to the style of the examples below.
 Format your response in the json format as shown.
-There should be exactly 3 keys: "title", "content" and "keywords". Enclose all values in double quotes as shown.
+There should be exactly 3 keys: "title", "content" and "keywords". 
 {
     "title": "The Illusion of Multitasking",
     "content": "Here's a mind-blowing fact about multitasking: it's not as effective as it seems! Our brains aren't designed to handle multiple tasks simultaneously. When we think we're multitasking, we're actually rapidly switching between tasks, which can decrease overall productivity. Research shows that focusing on one task at a time leads to better results. So, next time you feel like a multitasking master, remember, your brain might thank you for giving it a break and focusing on one thing at a time.",
