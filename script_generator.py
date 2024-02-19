@@ -19,17 +19,20 @@ generation_config: GenerationConfigType = {
 }
 
 
-def generate_script():
+def generate_script(topic: str):
     genai.configure(api_key=GOOGLE_API_KEY)
     model = genai.GenerativeModel('gemini-pro')
 
     with open('prompt.txt', 'r') as prompt_file:
-        prompt = prompt_file.read()
+        base_prompt = prompt_file.read()
+
+    prompt = base_prompt + topic
 
     try:
         response = model.generate_content(
             prompt, safety_settings=safety_settings, generation_config=generation_config)
         response_text = response.text
+        print(response_text)
         return json.loads(response_text)
 
     except Exception as error:
@@ -38,9 +41,7 @@ def generate_script():
 
 
 if __name__ == '__main__':
-    script = generate_script()
-    # print(script)
+    script = generate_script(topic='introversion')
     print(script['title'])
     print(script['content'])
-    # print(script['sentences'])
     print(script['keywords'])

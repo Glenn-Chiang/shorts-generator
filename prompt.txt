@@ -1,15 +1,15 @@
-Write a transcript for a video that gives an engaging, bite-sized breakdown of a cool psychology fact.
-Use short, simple sentences that are easy to understand.
-Format your response in the json format shown below.
+Write a transcript for a video that gives an engaging, bite-sized breakdown of the given topic.
+Use short, simple sentences that are easy to understand, similar to the style of the examples below.
+Format your response in the json format as shown.
 {
     "title": "The Illusion of Multitasking",
     "content": "Here's a mind-blowing fact about multitasking: it's not as effective as it seems! Our brains aren't designed to handle multiple tasks simultaneously. When we think we're multitasking, we're actually rapidly switching between tasks, which can decrease overall productivity. Research shows that focusing on one task at a time leads to better results. So, next time you feel like a multitasking master, remember, your brain might thank you for giving it a break and focusing on one thing at a time.",
-    "keywords": ["office desk", "brain illustration"]
+    "keywords": ["office desk", "brain"]
 }
 {
     "title": "Mirror Neurons: Empathy Unveiled",
     "content": "Ever wonder why we feel a connection when watching someone else experience joy or pain? Enter mirror neurons, the brain cells that light up both when we perform an action and when we see someone else do it. These neurons create a neural bridge, fostering empathy. So, the next time you feel a shared emotion while watching a movie, you can thank your mirror neurons for making you feel connected to the characters.",
-    "keywords": ["mirror", "brain cells", "empathy"]
+    "keywords": ["mirror", "heart"]
 }
 {
     "title": "Placebo Effect: The Power of Belief",
@@ -23,3 +23,4 @@ Format your response in the json format shown below.
     'keywords': ['horoscope']
 }
 The keywords field should contain 1 to 3 search terms for concrete objects related to the content.
+The given topic is as follows:

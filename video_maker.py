@@ -51,9 +51,9 @@ def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str):
 
 
 def get_random_clip(required_duration: int) -> VideoFileClip:
-    # Randomly select a video from assets
-    saved_videos = os.listdir('assets')
-    random_video_path = f'assets/{random.choice(saved_videos)}'
+    # Randomly select a video from asset videos
+    saved_videos = os.listdir('assets/video')
+    random_video_path = f'assets/video/{random.choice(saved_videos)}'
     video = VideoFileClip(random_video_path)
     video_duration = int(video.duration)
     # If audio duration is longer than full video duration, just clip the full video
@@ -79,19 +79,15 @@ def crop_clip(clip: VideoFileClip, target_size: Tuple[int,int]):
     return cropped_clip
 
 
-def create_video(image_urls: List[str], audio_duration: int, video_filepath: str):
+def create_video(image_urls: List[str], seconds_per_image: int, audio_duration: int, video_filepath: str):
     video_size = (1080,1920)
     # Video containing relevant stock images
     images_video = images_to_video(
-        image_urls=image_urls, video_size=(1080,1200))
+        image_urls=image_urls, video_size=(1080,1200), fps=1/seconds_per_image)
     # Random video from assets
     random_video = get_random_clip(required_duration=audio_duration).resize((1080,720))
     # Combines videos
     combined_video = clips_array([[random_video], [images_video]])
-    # Cut off any excess video that exceeds audio duration
-    combined_video = combined_video.subclip(0, audio_duration)
-    # Resize
-    # combined_video: VideoFileClip = combined_video
     combined_video.write_videofile(video_filepath)
     return combined_video
 
