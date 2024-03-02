@@ -31,6 +31,8 @@ python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
 ```
+## Manage assets (optional)
+The `assets/video` folder contains video files that the script will randomly select from to use as background clips. Feel free to add your own video files under this folder.
 ## Usage
 ```
 python main.py
