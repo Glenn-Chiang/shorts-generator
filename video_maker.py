@@ -102,7 +102,7 @@ def burn_subtitles_into_video(video_filepath: str, subtitles_filepath: str, fina
     final_video = CompositeVideoClip(
         [video, subtitles.set_position(('center', 'center'))])
 
-    final_video = final_video.subclip(0,-0.05)
+    final_video: VideoFileClip = final_video.subclip(0,-0.1)
     final_video.write_videofile(final_output_filepath)
 
     return final_video

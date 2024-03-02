@@ -5,22 +5,22 @@ There should be exactly 3 keys: "title", "content" and "keywords".
 {
     "title": "The Illusion of Multitasking",
     "content": "Here's a mind-blowing fact about multitasking: it's not as effective as it seems! Our brains aren't designed to handle multiple tasks simultaneously. When we think we're multitasking, we're actually rapidly switching between tasks, which can decrease overall productivity. Research shows that focusing on one task at a time leads to better results. So, next time you feel like a multitasking master, remember, your brain might thank you for giving it a break and focusing on one thing at a time.",
-    "keywords": ["office desk", "brain"]
+    "keywords": ["desk", "brain"]
 }
 {
     "title": "Mirror Neurons: Empathy Unveiled",
     "content": "Ever wonder why we feel a connection when watching someone else experience joy or pain? Enter mirror neurons, the brain cells that light up both when we perform an action and when we see someone else do it. These neurons create a neural bridge, fostering empathy. So, the next time you feel a shared emotion while watching a movie, you can thank your mirror neurons for making you feel connected to the characters.",
-    "keywords": ["mirror", "heart"]
+    "keywords": ["heart", "mirror]
 }
 {
     "title": "Placebo Effect: The Power of Belief",
     "content": "Did you know that a sugar pill can sometimes be as effective as a real medication? This is the placebo effect, where the belief in the treatment itself can lead to positive outcomes. Our minds have a remarkable ability to influence our bodies. The next time you experience the placebo effect, it's a testament to the incredible connection between mind and body.",
-    "keywords": ["pills"]
+    "keywords": ["pills", "doctor"]
 }
 {
     "title": "The Forer Effect: Self-Validation Bias",
     "content": "Ever been fooled by a vague horoscope or personality test that seems to describe you perfectly? That's likely the Forer Effect at play. It's our tendency to find personal meaning in general statements, even if they apply to most people. Understanding this bias helps us stay grounded and not fall prey to overly personalized claims.",
-    "keywords": ["horoscope"]
+    "keywords": ["stars", "constellation"]
 }
-The keywords field should contain 1 to 3 search terms for concrete objects related to the content.
+The keywords field should contain 1 to 3 search terms for concrete physical objects related to the content.
 The given topic is as follows:

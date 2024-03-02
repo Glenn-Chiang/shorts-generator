@@ -41,12 +41,10 @@ def generate_video(topic: str):
     number_of_images_required: int = math.ceil(
         tts_audio.duration / seconds_per_image)
 
-    # Generate search terms based on video script
-    images_query = keywords[0]
-
+    # Fetch images related to generated keywords
     print("Fetching images...")
     image_urls = fetch_images(
-        query=images_query, number_of_images=number_of_images_required)
+        search_terms=keywords, number_of_images=number_of_images_required)
 
     if not image_urls:
         print('No images found')
